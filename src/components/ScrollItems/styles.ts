@@ -13,5 +13,6 @@ export const styles = StyleSheet.create({
     color: theme.colors.blue_500,
     fontWeight: 'bold',
     fontSize: 10,
+    textAlign: 'center'
   }
 });
