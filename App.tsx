@@ -9,7 +9,7 @@ import theme from './src/styles/themes/theme';
  const App = () => {
    return (
      <ThemeProvider theme={theme}>
-       <StatusBar barStyle="light-content" />
+       <StatusBar barStyle="light-content" backgroundColor={theme.colors.blue_500}/>
        <Routes />
      </ThemeProvider>
    );
