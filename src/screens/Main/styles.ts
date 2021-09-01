@@ -5,6 +5,13 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  menu: {
+    flex: 1,
+    backgroundColor: theme.colors.blue_500,
+    borderWidth: 0,
+    margin: -1,
+    paddingHorizontal: 15,
+  },
   scroll: {
     paddingHorizontal: 15,
   },

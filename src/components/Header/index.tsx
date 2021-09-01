@@ -1,15 +1,25 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useTheme, Header as HeaderNE } from 'react-native-elements';
+import ButtonMenu from './components/ButtonMenu';
 
-const Header: React.FC = () => {
+import { styles } from './styles';
+
+interface HeaderProps {
+  onChangeMenu: () => void;
+}
+
+const Header: React.FC = ({ onChangeMenu }: HeaderProps) => {
   const { theme } = useTheme();
+
+  const hiddenMenu = () => {
+    onChangeMenu()
+  }
   return (
     <View>
       <HeaderNE
         placement="left"
-        leftComponent={{ icon: 'menu', color: '#fff' }}
-        centerComponent={{ text: 'Olá, José Francisco', style: { color: '#fff' } }}
+        leftComponent={<ButtonMenu onPress={hiddenMenu}/>}
         backgroundColor={theme.colors?.blue_500}
       />
     </View>

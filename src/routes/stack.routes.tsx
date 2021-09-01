@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import AuthRoutes from './tab.routes';
 import Login from '../screens/Login';
+import ForgotPassword from '../screens/ForgotPassword';
+import CreateAccount from '../screens/CreateAccount';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,6 +13,8 @@ const StackRoutes: React.FC = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={Login}/>
       <Stack.Screen name="Main" component={AuthRoutes}/>
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword}/>
+      <Stack.Screen name="CreateAccount" component={CreateAccount}/>
     </Stack.Navigator>
   );
 }

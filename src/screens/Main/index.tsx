@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Card, Icon, useTheme } from 'react-native-elements';
 
@@ -7,9 +7,11 @@ import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import BtnOferta from '../../components/btnOferta';
 import SelectOptions from '../../components/selectOptions';
+import DrawerMenu from './components/DrawerMenu';
 
 const Main: React.FC = () => {
   const { theme } = useTheme();
+  const [hiddenMenu, setHiddenMenu] = useState<boolean>(true);
 
   const data = [
     {
@@ -61,9 +63,12 @@ const Main: React.FC = () => {
 
   return (
   <View style={styles.container}> 
-    <Header />
-    <NavBar />
-    <ScrollView showsVerticalScrollIndicator={false}>   
+    <Header 
+      onChangeMenu={() => setHiddenMenu(!hiddenMenu)}
+    />
+    {!hiddenMenu && <DrawerMenu />}
+    {hiddenMenu && <NavBar />}
+    {hiddenMenu && <ScrollView showsVerticalScrollIndicator={false}>   
       <SelectOptions data={data} title="Suas operações"/>
 
       <Card containerStyle={styles.card}>
@@ -97,7 +102,7 @@ const Main: React.FC = () => {
       />
 
       <SelectOptions data={data2} title="Serviços para você"/>
-   </ScrollView>
+   </ScrollView>}
   </View>
   );
 }

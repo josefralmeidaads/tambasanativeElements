@@ -4,7 +4,7 @@ import theme from "../../styles/themes/theme";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    position: 'relative',
   },
   content: {
     flex: 1,
@@ -28,11 +28,16 @@ export const styles = StyleSheet.create({
     fontSize: 12,
   },
   footer: {
+    position: 'absolute',
     alignItems: 'center',
     justifyContent: 'flex-end',
     backgroundColor: theme.colors.blue_500,
     height: 80,
     paddingVertical: 10,
+    bottom: 0,
+    top: Dimensions.get('window').height - 80,
+    left: 0,
+    right: 0,
   },
   btn_footer: {
     backgroundColor: '#FFF',
