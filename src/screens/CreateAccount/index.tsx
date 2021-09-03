@@ -1,26 +1,65 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { View } from 'react-native';
+import { Button, Icon, useTheme  } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 import { styles } from './styles';
 
 const CreateAccount: React.FC = () => {
+  const { theme } = useTheme();
+  const navigation = useNavigation();
+
+  const handleNavigateAcceptPolitics = () => {
+    navigation.navigate('AcceptPolitics');
+  }
+
   return (
     <View style={styles.container}>
       <Button
+        onPress={() => navigation.goBack()}
         containerStyle={styles.header} 
         buttonStyle={styles.header}
-        title="Voltar"
+        titleStyle={styles.header_text}
+        icon={
+          <Icon 
+            type="font-awesome-5"
+            name="chevron-left"
+            color={theme.colors?.grey2}
+          />
+        }
       />
       <Button
+        onPress={handleNavigateAcceptPolitics}
         buttonStyle={styles.button_option_one}
         containerStyle={styles.button_option_one}
-        title="Teste 1"
+        titleStyle={styles.button_option_one_text}
+        title="Pessoa Física"
+        iconPosition="left"
+        icon={
+          <Icon 
+            type="font-awesome-5"
+            name="user"
+            solid={true}
+            color={theme.colors?.blue_500}
+            style={styles.icon}
+          />
+        }
       />
       <Button 
         buttonStyle={styles.button_option_two}
         containerStyle={styles.button_option_two}
-        title="Teste 2"
+        titleStyle={styles.button_option_two_text}
+        title="Pessoa Jurídica"
+        iconPosition="left"
+        icon={
+          <Icon 
+            type="font-awesome-5"
+            name="university"
+            solid={true}
+            color={theme.colors?.blue_500}
+            style={styles.icon}
+          />
+        }
       />
 
     </View>

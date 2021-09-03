@@ -5,6 +5,7 @@ import AuthRoutes from './tab.routes';
 import Login from '../screens/Login';
 import ForgotPassword from '../screens/ForgotPassword';
 import CreateAccount from '../screens/CreateAccount';
+import AcceptPolitics from '../screens/AcceptPolitics';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ const StackRoutes: React.FC = () => {
       <Stack.Screen name="Main" component={AuthRoutes}/>
       <Stack.Screen name="ForgotPassword" component={ForgotPassword}/>
       <Stack.Screen name="CreateAccount" component={CreateAccount}/>
+      <Stack.Screen name="AcceptPolitics" component={AcceptPolitics} />
     </Stack.Navigator>
   );
 }

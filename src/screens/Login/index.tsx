@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, Image, ImageBackground, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button } from 'react-native-elements';
+import { Button, BottomSheet } from 'react-native-elements';
 import { Link, useNavigation } from '@react-navigation/native';
 
 import logo from '../../assets/logo.png';
@@ -9,16 +9,25 @@ import fundo from '../../assets/login_bkg.png';
 import Inputs from '../../components/Inputs';
 import api from '../../services/api';
 import { styles } from './styles';
+import Aviso from '../../components/Aviso';
 
 const Login: React.FC = () => {
   const navigation = useNavigation();
-  const [password, setPassword] = useState<string>();
+  const [password, setPassword] = useState<string | undefined>();
   const [email, setEmail] = useState<string>();
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>();
 
   const login = async() => {
     try{
-      if(!email || !password){
-        return Alert.alert('Favor preencher os campos de email e senha!')
+      if(!email){
+        setTitle("Endereço de e-mail inválido.");
+        setIsVisible(true);
+        return;
+      } else if (!password || password.length < 6){
+        setTitle("A senha deve ter pelo menos 6 caracteres.");
+        setIsVisible(true);
+        return;
       }
       const response = await api.post('session', {
         email,
@@ -92,6 +101,12 @@ const Login: React.FC = () => {
       </Text>
     </View>
     </ImageBackground>
+    <BottomSheet isVisible={isVisible} containerStyle={{ backgroundColor: 'rgba(0.5, 0.25, 0, 0.8)' }}>
+    <Aviso 
+      title={title}
+      onPress={() => setIsVisible(false)}
+    />
+  </BottomSheet>
   </View>
   );
 }
