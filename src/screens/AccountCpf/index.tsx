@@ -5,7 +5,7 @@ import { Button, Icon, useTheme } from 'react-native-elements';
 import InputMask from '../../components/InputMask';
 import { styles } from './styles';
 
-const AccountCpf: React.FC = () => {
+const AccountCpf: React.FC = ({ navigation }: any) => {
   const { theme } = useTheme();
   const [cpf, setCpf] = useState<string>();
 
@@ -13,6 +13,7 @@ const AccountCpf: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <Button 
+          onPress={() => navigation.goBack()}
           icon={
             <Icon 
               type="font-awesome-5"
