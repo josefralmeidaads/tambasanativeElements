@@ -6,15 +6,18 @@ import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 import Aviso from '../../components/Aviso';
 
-const AcceptPolitics: React.FC = () => {
-  const navigation = useNavigation();
+const AcceptPolitics: React.FC = ({ navigation }: any) => {
   const { theme } = useTheme();
   const [checkedTerms, setCheckedTerms] = useState<boolean>(false);
   const [checkedPolitics, setCheckedPolitics] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [warning, setWarning] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>();
 
   const handleGoBack = () => {
-    setIsVisible(true)
+    setWarning(false);
+    setIsVisible(true);
+    setTitle("Tem certeza de que deseja voltar? Você perderá os dados preenchidos." );
     return;
   }
 
@@ -25,6 +28,21 @@ const AcceptPolitics: React.FC = () => {
     } else if (option === 'PROSSEGUIR') {
       navigation.goBack()
     }
+  }
+
+  const handleNavigateToCpf = () => {
+    setWarning(true);
+    setIsVisible(true);
+
+    if(!checkedTerms){
+      setTitle(`Você deve estar de acordo com ${'\n'} os nossos Termos de Uso.`)
+      return;
+    } else if (!checkedPolitics){
+      setTitle(`Você deve estar de acordo ${'\n'} com nossa Política de Privacidade.`)
+      return;
+    }
+    setIsVisible(false);
+    navigation.navigate('AccountCpf');
   }
 
   return (
@@ -65,7 +83,8 @@ const AcceptPolitics: React.FC = () => {
           title={`Li e estou de acordo com a Política de Privacidade.`}
         />
       </View>
-      <Button 
+      <Button
+        onPress={handleNavigateToCpf} 
         title="CONTINUAR"
         buttonStyle={styles.btn_continue}
         titleStyle={styles.btn_continue_text}
@@ -73,9 +92,9 @@ const AcceptPolitics: React.FC = () => {
       
       <BottomSheet isVisible={isVisible} containerStyle={{ backgroundColor: 'rgba(0.5, 0.25, 0, 0.8)' }}>
         <Aviso
-          title="Tem certeza de que deseja voltar? Você perderá os dados preenchidos." 
+          title={title}
           onPress={(option) => handleSwitchOption(option)}
-          warning={false}
+          warning={warning}
         />
       </BottomSheet>
     </View>

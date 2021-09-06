@@ -7,7 +7,7 @@ import ic_warning from '../../assets/ic_warning.png';
 
 interface AvisoProps {
   title: string | undefined;
-  onPress: (option?: string | undefined) => void;
+  onPress: (option?: any) => void;
   warning: boolean;
 }
 
@@ -17,7 +17,7 @@ const Aviso: React.FC<AvisoProps> = ({ title, warning, onPress }: AvisoProps) =>
     <View style={styles.container}>
       <View style={styles.wrapper}>
         {warning && <Button
-          onPress={() => onPress()}
+          onPress={() => onPress('FECHAR')}
           buttonStyle={styles.icon}
           type="clear"
           icon={
@@ -38,7 +38,7 @@ const Aviso: React.FC<AvisoProps> = ({ title, warning, onPress }: AvisoProps) =>
         title="Fechar" 
         buttonStyle={styles.close_button}
       />}
-      <View style={styles.container_warning_button}>
+      {!warning && <View style={styles.container_warning_button}>
         <Button
           onPress={() => onPress('FECHAR')}
           containerStyle={styles.warning_button}
@@ -53,9 +53,14 @@ const Aviso: React.FC<AvisoProps> = ({ title, warning, onPress }: AvisoProps) =>
           titleStyle={styles.warnin_button_yes_text}  
           title="SIM"
         />
-      </View>
+      </View>}
     </View>
   );
+}
+
+Aviso.defaultProps = {
+  warning: true,
+  title: 'Informe seu título'
 }
 
 export default Aviso;

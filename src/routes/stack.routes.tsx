@@ -6,6 +6,7 @@ import Login from '../screens/Login';
 import ForgotPassword from '../screens/ForgotPassword';
 import CreateAccount from '../screens/CreateAccount';
 import AcceptPolitics from '../screens/AcceptPolitics';
+import AccountCpf from '../screens/AccountCpf';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ const StackRoutes: React.FC = () => {
       <Stack.Screen name="ForgotPassword" component={ForgotPassword}/>
       <Stack.Screen name="CreateAccount" component={CreateAccount}/>
       <Stack.Screen name="AcceptPolitics" component={AcceptPolitics} />
+      <Stack.Screen name="AccountCpf" component={AccountCpf} />
     </Stack.Navigator>
   );
 }
