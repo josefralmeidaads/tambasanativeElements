@@ -21,13 +21,22 @@ const AcceptPolitics: React.FC = ({ navigation }: any) => {
     return;
   }
 
-  const handleSwitchOption = (option: string) => {
-    if(option === 'FECHAR'){
-      setIsVisible(false)
-      return
-    } else if (option === 'PROSSEGUIR') {
-      navigation.goBack()
+  const handleClose = () => {
+    return setIsVisible(false);
+  }
+
+  const handleBackDisplay = () => {
+    setIsVisible(false);
+    return navigation.goBack();
+  }
+
+  const SwitchOption = (value: string) => {
+    const Options = {
+      FECHAR: handleClose,
+      VOLTAR: handleBackDisplay
     }
+
+    return Options[value](value);
   }
 
   const handleNavigateToCpf = () => {
@@ -93,7 +102,7 @@ const AcceptPolitics: React.FC = ({ navigation }: any) => {
       <BottomSheet isVisible={isVisible} containerStyle={{ backgroundColor: 'rgba(0.5, 0.25, 0, 0.8)' }}>
         <Aviso
           title={title}
-          onPress={(option) => handleSwitchOption(option)}
+          onPress={(option: string) => SwitchOption(option)}
           warning={warning}
         />
       </BottomSheet>

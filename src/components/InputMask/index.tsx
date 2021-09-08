@@ -1,8 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TextInputProps } from 'react-native';
 import { TextInputMask, TextInputMaskProps } from 'react-native-masked-text';
 
 import { styles } from './styles';
+
 
 const InputMask: React.FC<TextInputMaskProps> = ({ ...rest }: TextInputMaskProps) => {
   return (

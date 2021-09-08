@@ -47,7 +47,7 @@ const Aviso: React.FC<AvisoProps> = ({ title, warning, onPress }: AvisoProps) =>
           title="NÃO"
         />
         <Button
-          onPress={() => onPress('PROSSEGUIR')}
+          onPress={() => onPress('VOLTAR')}
           containerStyle={styles.warning_button}
           buttonStyle={styles.warnin_button_yes}
           titleStyle={styles.warnin_button_yes_text}  
