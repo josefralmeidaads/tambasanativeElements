@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { BottomSheet, Button, Icon, useTheme } from 'react-native-elements';
 import Aviso from '../../components/Aviso';
+import InputWithoutMask from '../../components/InputWithoutMask ';
 
-import InputMask from '../../components/InputMask';
+
 import { styles } from './styles';
 
-const AccountName: React.FC = ({ navigation }: any) => {
+const AccountEmail: React.FC = ({ navigation }: any) => {
   const { theme } = useTheme();
-  const [name, setName] = useState<string>();
+  const [email, setEmail] = useState<string>();
   const [visible, setVisible] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();
 
@@ -36,8 +37,8 @@ const AccountName: React.FC = ({ navigation }: any) => {
     return options[value](value);
   }
 
-  const handleNavigateToAccountEmail = () => {
-    navigation.navigate('AccountEmail');
+  const handleNavigateToAccountCellPhone = () => {
+    navigation.navigate('AccountCellPhone')
   }
 
   return (
@@ -57,21 +58,22 @@ const AccountName: React.FC = ({ navigation }: any) => {
           type="clear"
           buttonStyle={styles.button_back}
         />
-        <Text style={styles.wrapper_text}>Qual o seu nome completo?</Text>
+        <Text style={styles.wrapper_text}>Qual o seu email?</Text>
+        <Text style={styles.wrapper_subtext}>
+          Ele será usado como sua principal identificação{'\n'}
+          na Tambasa Financeira
+        </Text>
       </View>
   
-      <InputMask 
-        type="custom"
-        options={{
-          
-        }}
+      <InputWithoutMask 
+        keyboardType="email-address"
         placeholder="Digite Aqui"
-        value={name}
-        onChangeText={(text) => setName(text)}
+        value={email}
+        onChangeText={(text) => setEmail(text)}
       />
 
-      <Button 
-        onPress={handleNavigateToAccountEmail}
+      <Button
+        onPress={handleNavigateToAccountCellPhone} 
         title="CONTINUAR"
         buttonStyle={styles.button_continue}
         titleStyle={styles.button_continue_text}
@@ -88,4 +90,4 @@ const AccountName: React.FC = ({ navigation }: any) => {
   );
 }
 
-export default AccountName;
+export default AccountEmail;

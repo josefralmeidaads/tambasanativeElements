@@ -8,6 +8,8 @@ import CreateAccount from '../screens/CreateAccount';
 import AcceptPolitics from '../screens/AcceptPolitics';
 import AccountCpf from '../screens/AccountCpf';
 import AccountName from '../screens/AccountName';
+import AccountEmail from '../screens/AccountEmail';
+import AccountCellPhone from '../screens/AccountCellPhone';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,8 @@ const StackRoutes: React.FC = () => {
       <Stack.Screen name="AcceptPolitics" component={AcceptPolitics} />
       <Stack.Screen name="AccountCpf" component={AccountCpf} />
       <Stack.Screen name="AccountName" component={AccountName} />
+      <Stack.Screen name="AccountEmail" component={AccountEmail} />
+      <Stack.Screen name="AccountCellPhone" component={AccountCellPhone} />
     </Stack.Navigator>
   );
 }

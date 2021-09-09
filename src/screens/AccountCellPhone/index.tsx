@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { BottomSheet, Button, Icon, useTheme } from 'react-native-elements';
 import Aviso from '../../components/Aviso';
@@ -6,11 +6,11 @@ import Aviso from '../../components/Aviso';
 import InputMask from '../../components/InputMask';
 import { styles } from './styles';
 
-const AccountName: React.FC = ({ navigation }: any) => {
+const AccountCellPhone: React.FC = ({ navigation }: any) => {
   const { theme } = useTheme();
-  const [name, setName] = useState<string>();
-  const [visible, setVisible] = useState<boolean>(false);
+  const [cell, setCell] = useState<string>();
   const [title, setTitle] = useState<string>();
+  const [visible, setVisible] = useState<boolean>(false);
 
   const handleGoBack = () => {
     setVisible(true);
@@ -18,26 +18,26 @@ const AccountName: React.FC = ({ navigation }: any) => {
     return;
   }
 
-  const handleClose = () => {
-    return setVisible(false);
+  const handleCloseModal = () => {
+    return setVisible(false)
   }
 
-  const handleBackDisplay = () => {
+  const handleMoveToAcceptPolitics = () => {
     setVisible(false);
     return navigation.goBack();
   }
 
-  const switchOption = (value: string) => {
+  const SwitchOption = (value: string) => {
     const options = {
-      FECHAR: handleClose,
-      VOLTAR: handleBackDisplay
+      FECHAR: () => handleCloseModal(),
+      VOLTAR: () => handleMoveToAcceptPolitics(),
     }
 
     return options[value](value);
   }
 
-  const handleNavigateToAccountEmail = () => {
-    navigation.navigate('AccountEmail');
+  const handleNavigateToAccountName = () => {
+    navigation.navigate('AccountName')
   }
 
   return (
@@ -57,21 +57,27 @@ const AccountName: React.FC = ({ navigation }: any) => {
           type="clear"
           buttonStyle={styles.button_back}
         />
-        <Text style={styles.wrapper_text}>Qual o seu nome completo?</Text>
+        <Text style={styles.wrapper_text}>Qual o seu celular?</Text>
+        <Text style={styles.wrapper_subtext}>
+          Ele será usado como sua principal identificação{'\n'}
+          na Tambasa Financeira
+        </Text>
       </View>
   
       <InputMask 
-        type="custom"
-        options={{
-          
-        }}
+        value={cell}
+        onChangeText={(text) => setCell(text)}
+        type="cel-phone"
         placeholder="Digite Aqui"
-        value={name}
-        onChangeText={(text) => setName(text)}
+        options={{
+          maskType: "BRL",
+          dddMask: '(99)',
+          withDDD: true,
+        }}
       />
 
-      <Button 
-        onPress={handleNavigateToAccountEmail}
+      <Button
+        onPress={handleNavigateToAccountName}
         title="CONTINUAR"
         buttonStyle={styles.button_continue}
         titleStyle={styles.button_continue_text}
@@ -80,7 +86,7 @@ const AccountName: React.FC = ({ navigation }: any) => {
       <BottomSheet isVisible={visible} containerStyle={{ backgroundColor: 'rgba(0.5, 0.25, 0, 0.8)' }}>
         <Aviso
           title={title}
-          onPress={(option: string) => switchOption(option)}
+          onPress={(option: string) => SwitchOption(option)}
           warning={false}
         />
       </BottomSheet>
@@ -88,4 +94,4 @@ const AccountName: React.FC = ({ navigation }: any) => {
   );
 }
 
-export default AccountName;
+export default AccountCellPhone;
