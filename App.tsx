@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import Routes from './src/routes/routes';
 import SplashScreen from 'react-native-splash-screen';
-import { ThemeProvider, } from 'react-native-elements';
+import { ThemeProvider } from 'react-native-elements';
 import theme from './src/styles/themes/theme';
 
  const App = () => {

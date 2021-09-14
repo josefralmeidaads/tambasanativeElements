@@ -17,7 +17,7 @@ const AcceptPolitics: React.FC = ({ navigation }: any) => {
   const handleGoBack = () => {
     setWarning(false);
     setIsVisible(true);
-    setTitle("Tem certeza de que deseja voltar? Você perderá os dados preenchidos." );
+    setTitle("Tem certeza de que deseja voltar? Você perderá os dados preenchidos.");
     return;
   }
 

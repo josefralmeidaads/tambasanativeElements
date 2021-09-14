@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
-    flex: 1,
   },
   input_mask: {
     borderBottomColor: "#BBB",

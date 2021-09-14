@@ -11,8 +11,10 @@ const AccountCpf: React.FC = ({ navigation }: any) => {
   const [cpf, setCpf] = useState<string>();
   const [title, setTitle] = useState<string>();
   const [visible, setVisible] = useState<boolean>(false);
+  const [warning, setWarning] = useState<boolean>(false);
 
   const handleGoBack = () => {
+    setWarning(false);
     setVisible(true);
     setTitle("Tem certeza de que deseja voltar? Você perderá os dados preenchidos." );
     return;
@@ -37,6 +39,12 @@ const AccountCpf: React.FC = ({ navigation }: any) => {
   }
 
   const handleNavigateToAccountName = () => {
+    if(!cpf){
+      setTitle('CPF Inválido');
+      setWarning(true);
+      setVisible(true);
+      return;
+    }
     navigation.navigate('AccountName')
   }
 
@@ -78,7 +86,7 @@ const AccountCpf: React.FC = ({ navigation }: any) => {
         <Aviso
           title={title}
           onPress={(option: string) => SwitchOption(option)}
-          warning={false}
+          warning={warning}
         />
       </BottomSheet>
     </View>

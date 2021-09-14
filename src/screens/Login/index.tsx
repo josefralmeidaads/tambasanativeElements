@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Alert, Image, ImageBackground, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, BottomSheet } from 'react-native-elements';
-import { Link, useNavigation } from '@react-navigation/native';
+import { Link } from '@react-navigation/native';
 
 import logo from '../../assets/logo.png';
 import fundo from '../../assets/login_bkg.png';
@@ -10,15 +10,17 @@ import Inputs from '../../components/Inputs';
 import api from '../../services/api';
 import { styles } from './styles';
 import Aviso from '../../components/Aviso';
+import Loading from '../../components/Loading';
 
-const Login: React.FC = () => {
-  const navigation = useNavigation();
+const Login: React.FC = ({ navigation }: any) => {
   const [password, setPassword] = useState<string | undefined>();
   const [email, setEmail] = useState<string>();
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();
 
   const login = async() => {
+    setIsLoading(true);
     try{
       if(!email){
         setTitle("Endereço de e-mail inválido.");
@@ -29,7 +31,7 @@ const Login: React.FC = () => {
         setIsVisible(true);
         return;
       }
-      const response = await api.post('session', {
+      const response = await api.post('/entrar', {
         email,
         password
       }, {
@@ -39,8 +41,10 @@ const Login: React.FC = () => {
       })
       await AsyncStorage.setItem('@user:', JSON.stringify(response.data));
       navigation.navigate('Main');
-    }catch(err){
+      setIsLoading(false);
+    }catch(err: any){
       Alert.alert(err.message);
+      setIsLoading(false);
     }
   }
 
@@ -50,6 +54,7 @@ const Login: React.FC = () => {
 
   return (
   <View style={styles.container}>
+    <Loading isLoading={isLoading}/>
     <ImageBackground 
       source={fundo} 
       style={styles.container}
@@ -105,6 +110,7 @@ const Login: React.FC = () => {
     <Aviso 
       title={title}
       onPress={() => setIsVisible(false)}
+      warning={true}
     />
   </BottomSheet>
   </View>

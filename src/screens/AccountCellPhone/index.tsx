@@ -36,8 +36,8 @@ const AccountCellPhone: React.FC = ({ navigation }: any) => {
     return options[value](value);
   }
 
-  const handleNavigateToAccountName = () => {
-    navigation.navigate('AccountName')
+  const handleNavigateToAccountPassword = () => {
+    navigation.navigate('AccountPassword')
   }
 
   return (
@@ -77,7 +77,7 @@ const AccountCellPhone: React.FC = ({ navigation }: any) => {
       />
 
       <Button
-        onPress={handleNavigateToAccountName}
+        onPress={handleNavigateToAccountPassword}
         title="CONTINUAR"
         buttonStyle={styles.button_continue}
         titleStyle={styles.button_continue_text}

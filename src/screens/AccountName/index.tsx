@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { BottomSheet, Button, Icon, useTheme } from 'react-native-elements';
 import Aviso from '../../components/Aviso';
+import InputWithoutMask from '../../components/InputWithoutMask ';
 
-import InputMask from '../../components/InputMask';
+
 import { styles } from './styles';
 
 const AccountName: React.FC = ({ navigation }: any) => {
@@ -59,16 +60,14 @@ const AccountName: React.FC = ({ navigation }: any) => {
         />
         <Text style={styles.wrapper_text}>Qual o seu nome completo?</Text>
       </View>
-  
-      <InputMask 
-        type="custom"
-        options={{
-          
-        }}
-        placeholder="Digite Aqui"
-        value={name}
-        onChangeText={(text) => setName(text)}
-      />
+      
+      <View style={{ flex: 1 }}>
+        <InputWithoutMask
+          placeholder="Digite Aqui"
+          value={name}
+          onChangeText={(text) => setName(text)}
+        />
+      </View>
 
       <Button 
         onPress={handleNavigateToAccountEmail}

@@ -65,20 +65,22 @@ const AccountEmail: React.FC = ({ navigation }: any) => {
         </Text>
       </View>
   
-      <InputWithoutMask 
-        keyboardType="email-address"
-        placeholder="Digite Aqui"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-
+      <View style={{ flex: 1 }}>
+        <InputWithoutMask 
+          keyboardType="email-address"
+          placeholder="Digite Aqui"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+      </View>
+  
       <Button
         onPress={handleNavigateToAccountCellPhone} 
         title="CONTINUAR"
         buttonStyle={styles.button_continue}
         titleStyle={styles.button_continue_text}
       />
-
+  
       <BottomSheet isVisible={visible} containerStyle={{ backgroundColor: 'rgba(0.5, 0.25, 0, 0.8)' }}>
         <Aviso
           title={title}
