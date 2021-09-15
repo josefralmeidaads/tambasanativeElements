@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import { Button, Icon, useTheme, CheckBox, BottomSheet } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 
 import { styles } from './styles';
 import Aviso from '../../components/Aviso';
 
+interface RouterProps {
+  display: string;
+}
+
 const AcceptPolitics: React.FC = ({ navigation }: any) => {
   const { theme } = useTheme();
+  const router = useRoute();
   const [checkedTerms, setCheckedTerms] = useState<boolean>(false);
   const [checkedPolitics, setCheckedPolitics] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [warning, setWarning] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();
+  const { display }:RouterProps = router.params;
 
   const handleGoBack = () => {
     setWarning(false);
@@ -39,7 +45,7 @@ const AcceptPolitics: React.FC = ({ navigation }: any) => {
     return Options[value](value);
   }
 
-  const handleNavigateToCpf = () => {
+  const handleNavigateToDisplay = () => {
     setWarning(true);
     setIsVisible(true);
 
@@ -51,7 +57,7 @@ const AcceptPolitics: React.FC = ({ navigation }: any) => {
       return;
     }
     setIsVisible(false);
-    navigation.navigate('AccountCpf');
+    navigation.navigate(display);
   }
 
   return (
@@ -93,7 +99,7 @@ const AcceptPolitics: React.FC = ({ navigation }: any) => {
         />
       </View>
       <Button
-        onPress={handleNavigateToCpf} 
+        onPress={handleNavigateToDisplay} 
         title="CONTINUAR"
         buttonStyle={styles.btn_continue}
         titleStyle={styles.btn_continue_text}

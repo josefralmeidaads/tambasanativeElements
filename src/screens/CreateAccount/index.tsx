@@ -9,8 +9,8 @@ const CreateAccount: React.FC = () => {
   const { theme } = useTheme();
   const navigation = useNavigation();
 
-  const handleNavigateAcceptPolitics = () => {
-    navigation.navigate('AcceptPolitics');
+  const handleNavigateAcceptPolitics = (params: string) => {
+    navigation.navigate('AcceptPolitics', { display: params });
   }
 
   return (
@@ -29,7 +29,7 @@ const CreateAccount: React.FC = () => {
         }
       />
       <Button
-        onPress={handleNavigateAcceptPolitics}
+        onPress={() => handleNavigateAcceptPolitics('AccountCpf')}
         buttonStyle={styles.button_option_one}
         containerStyle={styles.button_option_one}
         titleStyle={styles.button_option_one_text}
@@ -45,7 +45,8 @@ const CreateAccount: React.FC = () => {
           />
         }
       />
-      <Button 
+      <Button
+        onPress={() => handleNavigateAcceptPolitics('AccountCnpj')} 
         buttonStyle={styles.button_option_two}
         containerStyle={styles.button_option_two}
         titleStyle={styles.button_option_two_text}

@@ -20,7 +20,7 @@ const Login: React.FC = ({ navigation }: any) => {
   const [title, setTitle] = useState<string>();
 
   const login = async() => {
-    setIsLoading(true);
+    
     try{
       if(!email){
         setTitle("Endereço de e-mail inválido.");
@@ -31,6 +31,7 @@ const Login: React.FC = ({ navigation }: any) => {
         setIsVisible(true);
         return;
       }
+      setIsLoading(true);
       const response = await api.post('/entrar', {
         email,
         password
@@ -43,7 +44,11 @@ const Login: React.FC = ({ navigation }: any) => {
       navigation.navigate('Main');
       setIsLoading(false);
     }catch(err: any){
-      Alert.alert(err.message);
+      if(err.response.status === 403 && err.response.data === 'auth_fail_wrong_password'){
+        Alert.alert('Erro!', 'A senha digitada não confere com a cadastrada para este e-mail.');
+      } else {
+        Alert.alert('Error', err.response.data);
+      }
       setIsLoading(false);
     }
   }
