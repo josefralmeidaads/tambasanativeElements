@@ -4,6 +4,7 @@ import { Button, Icon, useTheme  } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
 import { styles } from './styles';
+import BtnGoBack from '../../components/BtnGoBack';
 
 const CreateAccount: React.FC = () => {
   const { theme } = useTheme();
@@ -15,19 +16,7 @@ const CreateAccount: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Button
-        onPress={() => navigation.goBack()}
-        containerStyle={styles.header} 
-        buttonStyle={styles.header}
-        titleStyle={styles.header_text}
-        icon={
-          <Icon 
-            type="font-awesome-5"
-            name="chevron-left"
-            color={theme.colors?.grey2}
-          />
-        }
-      />
+      <BtnGoBack onPress={() => navigation.goBack()}/>
       <Button
         onPress={() => handleNavigateAcceptPolitics('AccountCpf')}
         buttonStyle={styles.button_option_one}

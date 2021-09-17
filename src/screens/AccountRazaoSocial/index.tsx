@@ -8,9 +8,9 @@ import InputWithoutMask from '../../components/InputWithoutMask ';
 
 import { styles } from './styles';
 
-const AccountName: React.FC = ({ navigation }: any) => {
+const AccountRazaoSocial: React.FC = ({ navigation }: any) => {
   const { theme } = useTheme();
-  const [name, setName] = useState<string>();
+  const [razaoSocial, setRazaoSocial] = useState<string>();
   const [visible, setVisible] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();
 
@@ -38,27 +38,27 @@ const AccountName: React.FC = ({ navigation }: any) => {
     return options[value](value);
   }
 
-  const handleNavigateToAccountEmail = () => {
-    navigation.navigate('AccountEmail');
+  const handleNavigateToAccountAdress = () => {
+    navigation.navigate('AccountAdress');
   }
 
   return (
     <View style={styles.container}>
       <BtnGoBack onPress={handleGoBack} />
       <View style={styles.wrapper}>
-        <Text style={styles.wrapper_text}>Qual o seu nome completo?</Text>
+        <Text style={styles.wrapper_text}>Qual a sua Razão Social?</Text>
       </View>
       
       <View style={{ flex: 1 }}>
         <InputWithoutMask
           placeholder="Digite Aqui"
-          value={name}
-          onChangeText={(text) => setName(text)}
+          value={razaoSocial}
+          onChangeText={(text) => setRazaoSocial(text)}
         />
       </View>
 
       <Button 
-        onPress={handleNavigateToAccountEmail}
+        onPress={handleNavigateToAccountAdress}
         title="CONTINUAR"
         buttonStyle={styles.button_continue}
         titleStyle={styles.button_continue_text}
@@ -75,4 +75,4 @@ const AccountName: React.FC = ({ navigation }: any) => {
   );
 }
 
-export default AccountName;
+export default AccountRazaoSocial;

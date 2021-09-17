@@ -1,19 +1,32 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { BottomSheet, Button, Icon, useTheme } from 'react-native-elements';
+
 import Aviso from '../../components/Aviso';
 import BtnGoBack from '../../components/BtnGoBack';
-
-import InputMask from '../../components/InputMask';
+import CheckAdress from '../../components/CheckAdress';
 import { styles } from './styles';
 
-const AccountCellPhone: React.FC = ({ navigation }: any) => {
+export interface AdressProps {
+  complement: string,
+  road: string,
+  number: string,
+  neighboord: string,
+  state: string,
+  city: string,
+  zipCode: string,
+  add_complement: string,
+}
+
+const AccountAdress: React.FC = ({ navigation }: any) => {
   const { theme } = useTheme();
-  const [cell, setCell] = useState<string>();
+  const [adress, setAdress] = useState<AdressProps>({} as AdressProps);
   const [title, setTitle] = useState<string>();
   const [visible, setVisible] = useState<boolean>(false);
+  const [warning, setWarning] = useState<boolean>(false);
 
   const handleGoBack = () => {
+    setWarning(false);
     setVisible(true);
     setTitle("Tem certeza de que deseja voltar? Você perderá os dados preenchidos." );
     return;
@@ -23,7 +36,7 @@ const AccountCellPhone: React.FC = ({ navigation }: any) => {
     return setVisible(false)
   }
 
-  const handleMoveToAcceptPolitics = () => {
+  const handleMoveToRazaoSocial = () => {
     setVisible(false);
     return navigation.goBack();
   }
@@ -31,41 +44,24 @@ const AccountCellPhone: React.FC = ({ navigation }: any) => {
   const SwitchOption = (value: string) => {
     const options = {
       FECHAR: () => handleCloseModal(),
-      VOLTAR: () => handleMoveToAcceptPolitics(),
+      VOLTAR: () => handleMoveToRazaoSocial(),
     }
 
     return options[value](value);
   }
 
-  const handleNavigateToAccountPassword = () => {
-    navigation.navigate('AccountPassword')
+  const handleNavigateToRelationsManager = () => {
+    navigation.navigate('AccountRelationsManager')
   }
 
   return (
     <View style={styles.container}>
       <BtnGoBack onPress={handleGoBack} />
-      <View style={styles.wrapper}>
-        <Text style={styles.wrapper_text}>Qual o seu celular?</Text>
-        <Text style={styles.wrapper_subtext}>
-          Ele será usado como sua principal identificação{'\n'}
-          na Tambasa Financeira
-        </Text>
-      </View>
-  
-      <InputMask 
-        value={cell}
-        onChangeText={(text) => setCell(text)}
-        type="cel-phone"
-        placeholder="Digite Aqui"
-        options={{
-          maskType: "BRL",
-          dddMask: '(99)',
-          withDDD: true,
-        }}
-      />
+
+      <CheckAdress onChangeText={(value: AdressProps) => setAdress(value)} adress={adress}/>
 
       <Button
-        onPress={handleNavigateToAccountPassword}
+        onPress={handleNavigateToRelationsManager} 
         title="CONTINUAR"
         buttonStyle={styles.button_continue}
         titleStyle={styles.button_continue_text}
@@ -75,11 +71,11 @@ const AccountCellPhone: React.FC = ({ navigation }: any) => {
         <Aviso
           title={title}
           onPress={(option: string) => SwitchOption(option)}
-          warning={false}
+          warning={warning}
         />
       </BottomSheet>
     </View>
   );
 }
 
-export default AccountCellPhone;
+export default AccountAdress;

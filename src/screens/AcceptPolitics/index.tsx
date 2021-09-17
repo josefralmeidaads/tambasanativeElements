@@ -5,6 +5,7 @@ import { useRoute } from '@react-navigation/native';
 
 import { styles } from './styles';
 import Aviso from '../../components/Aviso';
+import BtnGoBack from '../../components/BtnGoBack';
 
 interface RouterProps {
   display: string;
@@ -62,20 +63,8 @@ const AcceptPolitics: React.FC = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      <BtnGoBack onPress={handleGoBack} />
       <View style={styles.wrapper}>
-        <Button 
-          onPress={handleGoBack}
-          type="clear"
-          buttonStyle={styles.btn_back}
-          containerStyle={styles.btn_back}
-          icon={
-            <Icon 
-              type="font-awesome-5"
-              name="chevron-left"
-              color={theme.colors?.grey2}
-            />
-          }
-        />
         <Text style={styles.wrapper_text}>
           Está de acordo com os {'\n'}Termos de Uso e Política de Privacidade?
         </Text>

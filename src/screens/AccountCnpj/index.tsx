@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { BottomSheet, Button, Icon, useTheme } from 'react-native-elements';
 import Aviso from '../../components/Aviso';
+import BtnGoBack from '../../components/BtnGoBack';
 
 import InputMask from '../../components/InputMask';
 import { styles } from './styles';
@@ -38,33 +39,20 @@ const AccountCnpj: React.FC = ({ navigation }: any) => {
     return options[value](value);
   }
 
-  const handleNavigateToAccountName = () => {
+  const handleNavigateToAccountRazaoSocial = () => {
     if(!cnpj){
       setTitle('CNPJ Inválido');
       setWarning(true);
       setVisible(true);
       return;
     }
-    navigation.navigate('AccountName')
+    navigation.navigate('AccountRazaoSocial')
   }
 
   return (
     <View style={styles.container}>
+      <BtnGoBack onPress={handleGoBack} />
       <View style={styles.wrapper}>
-        <Button 
-          onPress={handleGoBack}
-          icon={
-            <Icon 
-              type="font-awesome-5"
-              name="chevron-left"
-              color={theme.colors?.grey2}
-              style={styles.icon}
-              containerStyle={styles.icon}
-            />
-          }
-          type="clear"
-          buttonStyle={styles.button_back}
-        />
         <Text style={styles.wrapper_text}>Qual o seu CNPJ?</Text>
       </View>
   
@@ -76,7 +64,7 @@ const AccountCnpj: React.FC = ({ navigation }: any) => {
       />
 
       <Button
-        onPress={handleNavigateToAccountName}
+        onPress={handleNavigateToAccountRazaoSocial}
         title="CONTINUAR"
         buttonStyle={styles.button_continue}
         titleStyle={styles.button_continue_text}

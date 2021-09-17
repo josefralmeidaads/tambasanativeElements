@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { BottomSheet, Button, Icon, useTheme } from 'react-native-elements';
 import Aviso from '../../components/Aviso';
+import BtnGoBack from '../../components/BtnGoBack';
 
 import InputMask from '../../components/InputMask';
 import { styles } from './styles';
@@ -50,21 +51,8 @@ const AccountCpf: React.FC = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      <BtnGoBack onPress={handleGoBack} />
       <View style={styles.wrapper}>
-        <Button 
-          onPress={handleGoBack}
-          icon={
-            <Icon 
-              type="font-awesome-5"
-              name="chevron-left"
-              color={theme.colors?.grey2}
-              style={styles.icon}
-              containerStyle={styles.icon}
-            />
-          }
-          type="clear"
-          buttonStyle={styles.button_back}
-        />
         <Text style={styles.wrapper_text}>Qual o seu CPF?</Text>
       </View>
   

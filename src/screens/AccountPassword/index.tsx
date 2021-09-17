@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { BottomSheet, Button, Icon, useTheme } from 'react-native-elements';
 
 import Aviso from '../../components/Aviso';
+import BtnGoBack from '../../components/BtnGoBack';
 import InputWithoutMask from '../../components/InputWithoutMask ';
 import PasswordRequirements from './components/PasswordRequirements';
 
@@ -88,21 +89,8 @@ const AccountPassword: React.FC = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      <BtnGoBack onPress={handleGoBack} />
       <View style={styles.wrapper}>
-        <Button 
-          onPress={handleGoBack}
-          icon={
-            <Icon 
-              type="font-awesome-5"
-              name="chevron-left"
-              color={theme.colors?.grey2}
-              style={styles.icon}
-              containerStyle={styles.icon}
-            />
-          }
-          type="clear"
-          buttonStyle={styles.button_back}
-        />
         <Text style={styles.wrapper_text}>Hora de cadastrar uma senha</Text>
         <Text style={styles.wrapper_subtext}>
           Ela é a sua chave de acesso e deve seguir os {'\n'}

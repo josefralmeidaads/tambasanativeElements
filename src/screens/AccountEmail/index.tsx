@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { BottomSheet, Button, Icon, useTheme } from 'react-native-elements';
 import Aviso from '../../components/Aviso';
+import BtnGoBack from '../../components/BtnGoBack';
 import InputWithoutMask from '../../components/InputWithoutMask ';
 
 
@@ -43,21 +44,8 @@ const AccountEmail: React.FC = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      <BtnGoBack onPress={handleGoBack} />
       <View style={styles.wrapper}>
-        <Button 
-          onPress={handleGoBack}
-          icon={
-            <Icon 
-              type="font-awesome-5"
-              name="chevron-left"
-              color={theme.colors?.grey2}
-              style={styles.icon}
-              containerStyle={styles.icon}
-            />
-          }
-          type="clear"
-          buttonStyle={styles.button_back}
-        />
         <Text style={styles.wrapper_text}>Qual o seu email?</Text>
         <Text style={styles.wrapper_subtext}>
           Ele será usado como sua principal identificação{'\n'}
